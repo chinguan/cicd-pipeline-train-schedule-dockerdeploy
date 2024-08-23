@@ -1,23 +1,21 @@
 plugins {
-  id 'java'
-  id "com.github.node-gradle.node" version "3.2.1"
+    id 'java'
+    id "com.github.node-gradle.node" version "3.2.1"
 }
 
 java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(11)
-  }
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 node {
-  download = true
-  version = "16.13.0"
-  npmVersion = "7.24.0"
-  workDir = file("${project.buildDir}/nodejs")
-  nodeModulesDir = file("${project.projectDir}")
+    download = true
+    version = "16.13.0"
+    npmVersion = "7.24.0"
+    workDir = file("${project.buildDir}/nodejs")
+    nodeModulesDir = file("${project.projectDir}")
 }
-
-// Remove the manual declaration of 'task build'
 
 // Declare a task to create a zip of the app
 task zip(type: Zip) {
@@ -30,8 +28,8 @@ task zip(type: Zip) {
         include "routes/**"
         include "views/**"
     }
-    destinationDir = file("dist")
-    baseName = "trainSchedule"
+    destinationDirectory = file("dist") // Correct property name
+    archiveBaseName.set("trainSchedule") // Correct way to set the base name
 }
 
 // Declare task dependencies
